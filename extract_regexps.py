@@ -1,8 +1,13 @@
 from os import listdir
 from os.path import isfile, join
 import re
+import sys
 
-path = "."
+if len(sys.argv) == 2:
+    path = sys.argv[1]
+else:
+    path = "."
+print "Extracting regexps from path:", path
 for f in listdir(path):
     if isfile(f):
         file = open(f,"r")
