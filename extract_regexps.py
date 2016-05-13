@@ -9,8 +9,8 @@ else:
     path = "."
 print "Extracting regexps from path:", path
 for f in listdir(path):
-    if isfile(f):
-        file = open(f,"r")
+    if isfile(join(path,f)):
+        file = open(join(path,f),"r")
         for line in file.readlines():
             matches = {e for e in set(re.findall(
                       'java\.util\.regex\.Pattern compile\(java\.lang\.String\)>\("([^"]*)"', line))\
