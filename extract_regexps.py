@@ -16,4 +16,4 @@ for f in listdir(path):
                       'java\.util\.regex\.Pattern compile\(java\.lang\.String\)>\("([^"]*)"', line))\
                       | set(re.findall('boolean matches\(java\.lang\.String\)>\("([^"]*)"', line))}
             for str in matches:
-                print str
+                print '"'+str+'"'
