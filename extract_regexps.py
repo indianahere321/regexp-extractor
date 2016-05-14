@@ -3,12 +3,7 @@ from os.path import isfile, join
 import re
 import sys
 
-def main():
-    if len(sys.argv) == 2:
-        path = sys.argv[1]
-    else:
-        path = "."
-
+def android_regexp_extraction(path):
     for f in listdir(path):
         if isfile(join(path,f)):
             file = open(join(path,f),"r")
@@ -20,4 +15,9 @@ def main():
                     print '"'+str+'"'
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) == 2:
+        path = sys.argv[1]
+    else:
+        path = "."
+
+    android_regexp_extraction(path)
