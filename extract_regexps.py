@@ -26,7 +26,7 @@ def java_regexp_extraction(path):
                      matches = {e for e in set(re.findall('Pattern\.compile\("([^"]*)"', line))\
                                | set(re.findall('matches\("([^"]*)"', line))}
                      for str in matches:
-                         print '"a'+str+'"'
+                         print '"'+str+'"'
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
