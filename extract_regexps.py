@@ -4,7 +4,6 @@ from os.path import isfile, join
 import re
 import sys
 
-
 def android_regexp_extraction(path):
     for root, subFolders, files in walk(path):
         for f in files:
