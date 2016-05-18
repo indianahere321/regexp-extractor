@@ -28,9 +28,17 @@ def java_regexp_extraction(path):
                          print '"'+str+'"'
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         path = sys.argv[1]
+        language = sys.argv[2]
+        if language == "java":
+            java_regexp_extraction(path)
+        elif language == "android":
+            android_regexp_extraction(path)
+        else:
+            print "Usage: python extract_regexps.py <path> [android | java]"
     else:
-        path = "."
+        print "Usage: python extract_regexps.py <path> [android | java]"
 
-    java_regexp_extraction(path)
+    
+
