@@ -31,14 +31,14 @@ if __name__ == '__main__':
     if len(sys.argv) == 3:
         path = sys.argv[1]
         language = sys.argv[2]
-        if language == "java":
+        if language == "-j":
             java_regexp_extraction(path)
-        elif language == "android":
+        elif language == "-a":
             android_regexp_extraction(path)
         else:
-            print "Usage: python extract_regexps.py <path> [android | java]"
+            print "Usage: python extract_regexps.py <path> -[a | j]"
     else:
-        print "Usage: python extract_regexps.py <path> [android | java]"
+        print "Usage: python extract_regexps.py <path> -[a | j]"
 
     
 
