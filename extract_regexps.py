@@ -12,6 +12,19 @@ def is_java_file(f):
 def is_android_file(f):
     return f.endswith(".jimple")
 
+def post_process(str):
+    res = ''
+    literal = True
+    for i in range(len(str)):
+        if str[i] == '"' and (i == 0 or (0 < i and str[i - 1] != '\\')):
+            literal = not literal
+            continue
+        if literal:
+            res += str[i]
+        elif str[i] != ' ' and str[i] != '+':
+            return '';
+    return res;
+
 def initialize_regexp_patterns():
     global regexp_patterns
     regexp_patterns["-j"] = list()
@@ -34,6 +47,7 @@ def regexp_extraction(path, language):
                     matches = re.findall(regexp_patterns[language], line)
                     for tuple in matches:
                         for str in tuple:
+                            str = post_process(str);
                             if str != '':
                                 print '"'+str+'"'
 
