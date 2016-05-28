@@ -15,13 +15,13 @@ def is_android_file(f):
 def initialize_regexp_patterns():
     global regexp_patterns
     regexp_patterns["-j"] = list()
-    regexp_patterns["-j"].append('Pattern\.compile\("([^"]*)"')
-    regexp_patterns["-j"].append('matches\("([^"]*)"')
+    regexp_patterns["-j"].append('Pattern\.compile\("(.*)"')
+    regexp_patterns["-j"].append('matches\("(.*)"')
     regexp_patterns["-j"] = '|'.join(regexp_patterns["-j"])
 
     regexp_patterns["-a"] = list()
-    regexp_patterns["-a"].append('java\.util\.regex\.Pattern compile\(java\.lang\.String\)>\("([^"]*)"')
-    regexp_patterns["-a"].append('boolean matches\(java\.lang\.String\)>\("([^"]*)"')
+    regexp_patterns["-a"].append('java\.util\.regex\.Pattern compile\(java\.lang\.String\)>\("(.*)"')
+    regexp_patterns["-a"].append('boolean matches\(java\.lang\.String\)>\("(.*)"')
     regexp_patterns["-a"] = '|'.join(regexp_patterns["-a"])
 
 def regexp_extraction(path, language):
