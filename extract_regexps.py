@@ -1,6 +1,6 @@
 import glob
 from os import listdir, walk
-from os.path import isfile, join
+from os.path import isfile, join, isdir
 import re
 import sys
 
@@ -39,6 +39,7 @@ def initialize_regexp_patterns():
 
 def regexp_extraction(path, language):
     global regexp_patterns
+    regexs = list()
     for root, subFolders, files in walk(path):
         for f in files:
             if (language == "-a" and is_android_file(f)) or (language == "-j" and is_java_file(f)):
@@ -49,7 +50,17 @@ def regexp_extraction(path, language):
                         for str in tuple:
                             str = post_process(str);
                             if str != '':
-                                print '"'+str+'"'
+                                regexs.append('"'+str+'"')
+    return regexs
+
+def multiple_regexp_extraction(path, language):
+    global regexp_patterns
+    for f in listdir(path):
+        if isdir(f):
+            regexs=regexp_extraction(join(path,f), language)
+            out = open(f + '.txt', 'w')
+            for re in regexs:
+                out.write(re + '\n')
 
 if __name__ == '__main__':
     initialize_regexp_patterns()
@@ -58,7 +69,7 @@ if __name__ == '__main__':
         path = sys.argv[1]
         language = sys.argv[2]
         if language == "-j" or language == "-a":
-            regexp_extraction(path, language)
+            multiple_regexp_extraction(path, language)
         else:
             print "Usage: python extract_regexps.py <path> -[a | j]"
     else:
