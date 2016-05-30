@@ -56,24 +56,34 @@ def regexp_extraction(path, language):
 def multiple_regexp_extraction(path, language):
     global regexp_patterns
     for f in listdir(path):
-        if isdir(f):
+        if isdir(join(path,f)):
             regexs=regexp_extraction(join(path,f), language)
             out = open(f + '.txt', 'w')
             for re in regexs:
                 out.write(re + '\n')
 
+def single_regexp_extraction(path, language):
+    regexs = regexp_extraction(path, language)
+    out = open('regexes.txt', 'w')
+    for re in regexs:
+        out.write(re + '\n')
+
 if __name__ == '__main__':
     initialize_regexp_patterns()
 
-    if len(sys.argv) == 3:
+    if len(sys.argv) == 4:
         path = sys.argv[1]
         language = sys.argv[2]
-        if language == "-java" or language == "-jimple":
-            multiple_regexp_extraction(path, language)
+        mode = sys.argv[3]
+        if (language == "-java" or language == "-jimple") and (mode == "-single" or mode =="-multiple"):
+            if mode == "-single":
+                single_regexp_extraction(path, language)
+            else:
+                multiple_regexp_extraction(path, language)
         else:
-            print "Usage: python extract_regexps.py <path> -[java | jimple]"
+            print "Usage: python extract_regexps.py <path> -[java | jimple] -[single | multiple]"
     else:
-        print "Usage: python extract_regexps.py <path> -[java | jimple]"
+        print "Usage: python extract_regexps.py <path> -[java | jimple] -[single | multiple]"
 
     
 
