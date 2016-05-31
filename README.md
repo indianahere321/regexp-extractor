@@ -12,4 +12,4 @@ where:
 files of a single application, or multiple directories with 
 different applications, respectively.
 
-The results are written to the file **regexes.txt***
+The results are written to the file **regexes.txt**
